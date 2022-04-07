@@ -1,8 +1,16 @@
 <?php
 
-//use Illuminate\Http\Request;
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+// Controller
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\api\AuthController;
+// Model
+use App\Models\User;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,9 +26,30 @@ use App\Http\Controllers\Api\UserController;
 //    return $request->user();
 //});
 
-// Youtube
-Route::get('users', [UserController::class, 'index']);
-Route::post('users/create', [UserController::class, 'store']);
+// GET
+Route::get('users', [UserController::class, 'index']); // Listar usuários
+
+// POST
+Route::post('users/create', [UserController::class, 'store']); // Criar usuário
+Route::post('auth/login', [AuthController::class, 'login']); // Login
+
+
+
+
+//Route::post('/login', function(Request $request){
+//
+//    // Autenticação
+//    if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+//        $user = Auth::user();
+//
+//        //Gerar token
+//        $token = $user->createToken('JWT');
+//
+//        return response()->json($token, 200);
+//    }
+//
+//    return response()->json('Usuário inválido', 401);
+//});
 
 // DEU CERTO
 //Route::get('users', function() {
