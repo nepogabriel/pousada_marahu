@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 // Controller
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\AccommodationController;
 // Model
 use App\Models\User;
 
@@ -28,30 +29,16 @@ use App\Models\User;
 
 // GET
 Route::get('users', [UserController::class, 'index']); // Listar usuários
+Route::get('accommodations', [AccommodationController::class, 'index']); // Listar Acomodações
+Route::get('accommodation/info/{id}', [AccommodationController::class, 'info']); // Dados p/ pág. de edição Acomodação
 
 // POST
 Route::post('users/create', [UserController::class, 'store']); // Criar usuário
 Route::post('auth/login', [AuthController::class, 'login']); // Login
+Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
 
+// PUT
+Route::put('accommodation/update/{id}', [AccommodationController::class, 'update']); // Atualizar Acomodação
 
-
-
-//Route::post('/login', function(Request $request){
-//
-//    // Autenticação
-//    if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-//        $user = Auth::user();
-//
-//        //Gerar token
-//        $token = $user->createToken('JWT');
-//
-//        return response()->json($token, 200);
-//    }
-//
-//    return response()->json('Usuário inválido', 401);
-//});
-
-// DEU CERTO
-//Route::get('users', function() {
-//    return 'Deu certo';
-//});
+// DELETE
+Route::delete('accommodation/{id}', [AccommodationController::class, 'destroy']); // Deletendo Acomodação
