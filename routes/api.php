@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 // Controller
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\AccommodationController;
 // Model
 use App\Models\User;
 
@@ -32,7 +33,7 @@ Route::get('users', [UserController::class, 'index']); // Listar usuários
 // POST
 Route::post('users/create', [UserController::class, 'store']); // Criar usuário
 Route::post('auth/login', [AuthController::class, 'login']); // Login
-
+Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
 
 
 
