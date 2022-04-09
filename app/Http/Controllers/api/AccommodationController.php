@@ -31,6 +31,19 @@ class AccommodationController extends Controller
         return response()->json(['message' => 'Acomodação cadastrada!'], 200);
     }
 
+    public function edit($id) {
+        $accommodation = Accommodation::findOrFail($id);
+
+        return response()->json($accommodation);
+    }
+
+    public function update(Request $request) {
+        // Alterando somente os dados que vieram na requisição
+        Accommodation::findOrFail($request->id)->update($request->all());
+
+        return response()->json(['message' => 'Acomodação editada!'], 200);
+    }
+
     public function destroy($id) {
 
         Accommodation::findOrFail($id)->delete();
