@@ -28,6 +28,13 @@ class AccommodationController extends Controller
 
         $accommodation->save();
 
-        return response()->json('Acomodação cadastrada com sucesso!', 200);
+        return response()->json(['message' => 'Acomodação cadastrada!'], 200);
+    }
+
+    public function destroy($id) {
+
+        Accommodation::findOrFail($id)->delete();
+
+        return response()->json(['message' => 'Acomodação deletada!'], 200);
     }
 }

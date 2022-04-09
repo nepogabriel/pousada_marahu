@@ -35,3 +35,6 @@ Route::get('accommodations', [AccommodationController::class, 'index']); // List
 Route::post('users/create', [UserController::class, 'store']); // Criar usuário
 Route::post('auth/login', [AuthController::class, 'login']); // Login
 Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
+
+// DELETE
+Route::delete('accommodation/{id}', [AccommodationController::class, 'destroy']); // Deletendo Acomodação
