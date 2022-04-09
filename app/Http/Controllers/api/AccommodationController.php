@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class AccommodationController extends Controller
 {
+    public function index() {
+        $accommodations = Accommodation::all();
+
+        return response()->json($accommodations, 200);
+    }
+
     // Criando acomodação
     public function store(Request $request) {
         // Instanciando model
