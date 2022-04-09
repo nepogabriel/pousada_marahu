@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\api\EscortController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,7 @@ Route::get('accommodation/info/{id}', [AccommodationController::class, 'info']);
 Route::post('users/create', [UserController::class, 'store']); // Criar usuário
 Route::post('auth/login', [AuthController::class, 'login']); // Login
 Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
+Route::post('escort/create/{id}', [EscortController::class, 'store']); // Cadastrar Acompanhante
 
 // PUT
 Route::put('accommodation/update/{id}', [AccommodationController::class, 'update']); // Atualizar Acomodação
