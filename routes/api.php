@@ -30,7 +30,7 @@ use App\Models\User;
 // GET
 Route::get('users', [UserController::class, 'index']); // Listar usuários
 Route::get('accommodations', [AccommodationController::class, 'index']); // Listar Acomodações
-Route::get('accommodation/edit/{id}', [AccommodationController::class, 'edit']); // Dados p/ pág. de edição Acomodação
+Route::get('accommodation/info/{id}', [AccommodationController::class, 'info']); // Dados p/ pág. de edição Acomodação
 
 // POST
 Route::post('users/create', [UserController::class, 'store']); // Criar usuário

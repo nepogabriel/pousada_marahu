@@ -16,22 +16,26 @@ class AccommodationController extends Controller
 
     // Criando acomodação
     public function store(Request $request) {
-        // Instanciando model
-        $accommodation = new Accommodation();
+        try {
+            // Instanciando model
+            $accommodation = new Accommodation();
 
-        $accommodation->name = $request->name;
-        $accommodation->value = $request->value;
-        $accommodation->double_bed = $request->double_bed;
-        $accommodation->single_bed = $request->single_bed;
-        $accommodation->air_conditioning = $request->air_conditioning;
-        $accommodation->tv = $request->tv;
+            $accommodation->name = $request->name;
+            $accommodation->value = $request->value;
+            $accommodation->double_bed = $request->double_bed;
+            $accommodation->single_bed = $request->single_bed;
+            $accommodation->air_conditioning = $request->air_conditioning;
+            $accommodation->tv = $request->tv;
 
-        $accommodation->save();
+            $accommodation->save();
 
-        return response()->json(['message' => 'Acomodação cadastrada!'], 200);
+            return response()->json(['message' => 'Acomodação cadastrada!'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Erro ao cadastrar a acomodação!'], 500);
+        }
     }
 
-    public function edit($id) {
+    public function info($id) {
         $accommodation = Accommodation::findOrFail($id);
 
         return response()->json($accommodation);
