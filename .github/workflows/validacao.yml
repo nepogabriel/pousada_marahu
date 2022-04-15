@@ -1,7 +1,7 @@
 on:
   push:
     - validacao
-name: 🚀 Deploy website on push
+name: 🚀 Validacao website on push
 jobs:
   web-deploy:
     name: 🎉 Deploy
@@ -16,4 +16,4 @@ jobs:
           server: ${{ secrets.ftp_host }}
           username: ${{ secrets.ftp_user }}
           password: ${{ secrets.ftp_password }}
-          server-dir: /validacao
+          server-dir: public_html/validacao/
