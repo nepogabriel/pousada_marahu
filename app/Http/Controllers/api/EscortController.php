@@ -47,4 +47,10 @@ class EscortController extends Controller
 
         return response()->json(['message' => 'Acompanhante editado!'], 200);
     }
+
+    public function destroy($id_user, $id_escort) {
+        Escort::findOrFail($id_escort)->delete();
+
+        return response()->json(['message' => 'Acompanhanet deletado!'], 200);
+    }
 }

@@ -47,3 +47,4 @@ Route::put('escort/update/{id_user}/{id_escort}', [EscortController::class, 'upd
 
 // DELETE
 Route::delete('accommodation/{id}', [AccommodationController::class, 'destroy']); // Deletendo Acomodação
+Route::delete('escort/delete/{id_user}/{id_escort}', [EscortController::class, 'destroy']); // Deletando Acompanhante
