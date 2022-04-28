@@ -32,8 +32,8 @@ use App\Models\User;
 Route::get('users', [UserController::class, 'index']); // Listar usuários
 Route::get('accommodations', [AccommodationController::class, 'index']); // Listar Acomodações
 Route::get('accommodation/info/{id}', [AccommodationController::class, 'info']); // Dados p/ pág. de edição Acomodação
-Route::get('escorts/{id}', [EscortController::class, 'index']);
-Route::get('escort/{id_user}/{id_escort}', [EscortController::class, 'info']);
+Route::get('escorts/{id}', [EscortController::class, 'index']); // Listar todos os acompanhantes
+Route::get('escort/{id_user}/{id_escort}', [EscortController::class, 'info']); // Listar acompanhante específico
 
 // POST
 Route::post('users/create', [UserController::class, 'store']); // Criar usuário
@@ -43,6 +43,7 @@ Route::post('escort/create/{id}', [EscortController::class, 'store']); // Cadast
 
 // PUT
 Route::put('accommodation/update/{id}', [AccommodationController::class, 'update']); // Atualizar Acomodação
+Route::put('escort/update/{id_user}/{id_escort}', [EscortController::class, 'update']); // Atualizar Acompanhante
 
 // DELETE
 Route::delete('accommodation/{id}', [AccommodationController::class, 'destroy']); // Deletendo Acomodação

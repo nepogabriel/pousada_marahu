@@ -40,4 +40,11 @@ class EscortController extends Controller
 
         return response()->json($escort);
     }
+
+    public function update(Request $request) {
+        // Alterando somente os dados que vieram na requisição
+        Escort::findOrFail($request->id_escort)->update($request->all());
+
+        return response()->json(['message' => 'Acompanhante editado!'], 200);
+    }
 }

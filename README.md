@@ -74,3 +74,5 @@ OBS.: Enviar somente o campo que for alterar.
 ### Listar acompanhante específico:
     http://127.0.0.1:8000/api/escort/5(id do usuário)/1(id do acompanhante)
 
+### Atualizar acompanhante:
+    http://127.0.0.1:8000/api/escort/update/5(id do usuário)/2(id do acompanhante)
