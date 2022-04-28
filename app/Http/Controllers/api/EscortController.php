@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class EscortController extends Controller
 {
+
+    // Listando todos
+    public function index($id) {
+        $escorts = Escort::all()->where('id_user', $id);
+
+        return response()->json($escorts, 200);
+    }
+
     public function store(Request $request) {
         try {
             $escort = new Escort();
@@ -24,5 +32,12 @@ class EscortController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => 'Erro ao cadastrar acompanhante!'], 500);
         }
+    }
+
+    // Listar específico
+    public function info($id_user, $id_escort) {
+        $escort = Escort::findOrFail($id_escort);
+
+        return response()->json($escort);
     }
 }
