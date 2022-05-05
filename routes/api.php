@@ -27,31 +27,21 @@ use App\Models\User;
 //});
 
 // GET
+route::get('/', function() {
+   return response()->json(['api_name' => 'api-marahu', 'api_version' => '1.0.0']);
+});
 Route::get('users', [UserController::class, 'index']); // Listar usuários
 
 // POST
 Route::post('users/create', [UserController::class, 'store']); // Criar usuário
-Route::post('auth/login', [AuthController::class, 'login']); // Login
+//Route::post('auth/login', [AuthController::class, 'login']); // Login
+
+// PREFIX
+Route::prefix('v1')->group(function () {
+    Route::post('login', [AuthController::class, 'login']);
+});
 
 
-
-
-//Route::post('/login', function(Request $request){
-//
-//    // Autenticação
-//    if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-//        $user = Auth::user();
-//
-//        //Gerar token
-//        $token = $user->createToken('JWT');
-//
-//        return response()->json($token, 200);
-//    }
-//
-//    return response()->json('Usuário inválido', 401);
-//});
-
-// DEU CERTO
-//Route::get('users', function() {
-//    return 'Deu certo';
-//});
+//Route::post('logout', 'AuthController@logout');
+//Route::post('refresh', 'AuthController@refresh');
+//Route::post('me', 'AuthController@me');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Services\Auth\LoginService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -15,32 +16,18 @@ class AuthController extends Controller
         $this->loginService = $loginService;
     }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function login(Request $request)
     {
 
         try {
             $credentials = $request->only('email', 'password');
+
             $auth = $this->loginService->execute($credentials);
 
-            return response()->json($auth, 200);
-        }catch(\Exception $ex) {
+            return response()->json(['status' => true, 'teste' => 'testado!'], 200);
+        } catch (\Exception $ex) {
             return response()->json(['error' => true, 'message' => $ex->getMessage()], 500);
         }
-
-//        // Pegando apenas email e senha
-//        $credentials = $request->only(['email', 'password']);
-//
-//        // Trabalhando com o Guard api
-//        if (!$token = auth('api')->attempt($credentials)) {
-//            return response()->json(['error' => 'Unauthorized'], 401);
-//        }
-//
-//        return $this->respondWithToken($token);
     }
 
 //    /**

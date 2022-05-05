@@ -163,11 +163,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
-         */
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class, // JWT Tymon
-
-        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -175,6 +170,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+         * Package Service Providers...
+         */
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class // JWT Tymon
 
     ],
 
