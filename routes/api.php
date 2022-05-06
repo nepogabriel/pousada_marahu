@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Middleware\Api\ProtectedRouteAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -34,14 +35,9 @@ Route::get('users', [UserController::class, 'index']); // Listar usuários
 
 // POST
 Route::post('users/create', [UserController::class, 'store']); // Criar usuário
-//Route::post('auth/login', [AuthController::class, 'login']); // Login
+Route::post('login', [AuthController::class, 'login']); // Login
 
-// PREFIX
-Route::prefix('v1')->group(function () {
-    Route::post('login', [AuthController::class, 'login']);
+Route::middleware([ProtectedRouteAuth::class])->group(function () {
+    Route::post('me', [AuthController::class, 'me']);
+    Route::post('logout', [AuthController::class, 'logout']);
 });
-
-
-//Route::post('logout', 'AuthController@logout');
-//Route::post('refresh', 'AuthController@refresh');
-//Route::post('me', 'AuthController@me');

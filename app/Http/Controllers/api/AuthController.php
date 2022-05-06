@@ -31,4 +31,22 @@ class AuthController extends Controller
         }
     }
 
+    public function me()
+    {
+        try {
+            return response()->json(auth()->user(), 200);
+        } catch (Exception $ex) {
+            return response()->json(['error' => true, 'message' => $ex->getMessage()], $ex->getCode());
+        }
+    }
+
+    public function logout()
+    {
+        try {
+            auth()->logout(true);
+        } catch (Exception $ex) {
+            return response()->json(['error' => true, 'message' => $ex->getMessage()], $ex->getCode());
+        }
+    }
+
 }

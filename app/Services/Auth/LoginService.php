@@ -16,13 +16,13 @@ class LoginService
             throw new Exception('Not authorized', 401);
 
         // Retornando token e dados do usuário
-        return [
+        $data = [
             'access_token' => $token,
             'token_type' => 'Bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user(),
         ];
 
-        //return response()->json($resposta);
+        return response()->json($data);
     }
 }
