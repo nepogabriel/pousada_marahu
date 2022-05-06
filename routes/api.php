@@ -1,7 +1,6 @@
 <?php
 
 
-use App\Http\Middleware\Api\ProtectedRouteAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
