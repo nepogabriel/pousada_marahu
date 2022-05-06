@@ -11,6 +11,7 @@ use App\Http\Controllers\api\AuthController;
 // Model
 use App\Models\User;
 
+use App\Http\Middleware\Api\ProtectedRouteAuth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,13 @@ use App\Models\User;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('login', [AuthController::class, 'login']); // Login
+
+Route::middleware([ProtectedRouteAuth::class])->group(function () {
+    Route::post('me', [AuthController::class, 'me']);
+    Route::post('logout', [AuthController::class, 'logout']);
+});
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
@@ -35,9 +43,3 @@ Route::get('users', [UserController::class, 'index']); // Listar usuários
 
 // POST
 Route::post('users/create', [UserController::class, 'store']); // Criar usuário
-Route::post('login', [AuthController::class, 'login']); // Login
-
-Route::middleware([ProtectedRouteAuth::class])->group(function () {
-    Route::post('me', [AuthController::class, 'me']);
-    Route::post('logout', [AuthController::class, 'logout']);
-});
