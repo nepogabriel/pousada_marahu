@@ -30,6 +30,9 @@ Route::middleware([ProtectedRouteAuth::class])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 });
 
+// POST
+Route::post('users/create', [UserController::class, 'store']); // Criar usuário
+
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
@@ -39,5 +42,3 @@ route::get('/', function() {
    return response()->json(['api_name' => 'api-marahu', 'api_version' => '1.0.0']);
 });
 Route::get('users', [UserController::class, 'index']); // Listar usuários
-// POST
-Route::post('users/create', [UserController::class, 'store']); // Criar usuário
