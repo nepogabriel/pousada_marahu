@@ -39,6 +39,5 @@ route::get('/', function() {
    return response()->json(['api_name' => 'api-marahu', 'api_version' => '1.0.0']);
 });
 Route::get('users', [UserController::class, 'index']); // Listar usuários
-
 // POST
 Route::post('users/create', [UserController::class, 'store']); // Criar usuário
