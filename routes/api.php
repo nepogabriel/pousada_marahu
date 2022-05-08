@@ -28,6 +28,7 @@ use App\Http\Middleware\Api\ProtectedRouteAuth;
 Route::middleware([ProtectedRouteAuth::class])->group(function () {
     Route::post('me', [AuthController::class, 'me']);
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
 });
 
 Route::post('login', [AuthController::class, 'login']); // Login
@@ -46,7 +47,6 @@ route::get('/', function() {
 // POST
 Route::post('users/create', [UserController::class, 'store']); // Criar usuário
 Route::post('auth/login', [AuthController::class, 'login']); // Login
-Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
 Route::post('escort/create/{id}', [EscortController::class, 'store']); // Cadastrar Acompanhante
 
 // PUT
