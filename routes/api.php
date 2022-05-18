@@ -45,6 +45,7 @@ Route::middleware([ProtectedRouteAuth::class])->group(function () {
     Route::put('escort/update/{id_user}/{id_escort}', [EscortController::class, 'update']); // Atualizar Acompanhante
 
     // DELETE
+    Route::delete('user/delete/{id}', [UserController::class, 'destroy']); // Deletando Usuário
     Route::delete('accommodation/{id}', [AccommodationController::class, 'destroy']); // Deletendo Acomodação
     Route::delete('escort/delete/{id_user}/{id_escort}', [EscortController::class, 'destroy']); // Deletando Acompanhante
 });
