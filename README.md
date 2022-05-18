@@ -1,11 +1,24 @@
 # Documentação Back-End
 
-## USUÁRIO
-### Listar todos os usuários:
-    http://127.0.0.1:8000/api/users
+## Login
+    http://127.0.0.1:8000/api/me
+- Tipo: **POST**
 
+### Listar o atual usuário logado:
+    http://127.0.0.1:8000/api/me
+- Tipo: **POST**
+
+## Logout
+    http://127.0.0.1:8000/api/logout
+- Tipo: **POST**
+
+---
+
+## USUÁRIO
 ### Criar usuário:
     http://127.0.0.1:8000/api/users/create
+- Tipo: **POST**
+
 
 - Exemplo *JSON*:
 ``` json
@@ -17,6 +30,10 @@
     "phone": "61999999999"
 }
 ```
+
+### Listar todos os usuários:
+    http://127.0.0.1:8000/api/users
+- Tipo: **GET**
 
 ---
 

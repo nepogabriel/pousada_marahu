@@ -26,21 +26,19 @@ use App\Http\Middleware\Api\ProtectedRouteAuth;
 */
 
 Route::middleware([ProtectedRouteAuth::class])->group(function () {
-    Route::post('me', [AuthController::class, 'me']);
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
-    Route::get('accommodations', [AccommodationController::class, 'index']); // Listar Acomodações
-
     // GET
     Route::get('users', [UserController::class, 'index']); // Listar usuários
+    Route::get('accommodations', [AccommodationController::class, 'index']); // Listar Acomodações
     Route::get('accommodation/info/{id}', [AccommodationController::class, 'info']); // Dados p/ pág. de edição Acomodação
     Route::get('escorts/{id}', [EscortController::class, 'index']); // Listar todos os acompanhantes
     Route::get('escort/{id_user}/{id_escort}', [EscortController::class, 'info']); // Listar acompanhante específico
 
     // POST
     Route::post('users/create', [UserController::class, 'store']); // Criar usuário
-    Route::post('auth/login', [AuthController::class, 'login']); // Login
-    Route::post('escort/create/{id}', [EscortController::class, 'store']); // Cadastrar Acompanhante
+    Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
+    Route::post('escort/create/{id}', [EscortController::class, 'store']); // Cadastrar
+    Route::post('me', [AuthController::class, 'me']);
+    Route::post('logout', [AuthController::class, 'logout']);
 
     // PUT
     Route::put('accommodation/update/{id}', [AccommodationController::class, 'update']); // Atualizar Acomodação
