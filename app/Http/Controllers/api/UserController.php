@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -36,12 +37,10 @@ class UserController extends Controller
 
         $user->save();
 
-//        if( $user->save() )
-//            return 'Usuário cadastrado com sucesso!';
-//        else
-//            return 'Não foi possível cadastrar o usuário!';
-
-        return 'Usuário cadastrado com sucesso!';
+        if( $user->save() )
+            return response()->json(['message' => 'Usuário cadastrado com sucesso!'], 200);
+        else
+            return response()->json(['message' => 'Não foi possível cadastrar o usuário!'], 500);
     }
 
 //    public function show($id)
