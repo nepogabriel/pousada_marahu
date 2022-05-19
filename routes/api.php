@@ -41,6 +41,7 @@ Route::middleware([ProtectedRouteAuth::class])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     // PUT
+    Route::put('user/update/{id}', [UserController::class, 'update']); // Atualizar Acomodação
     Route::put('accommodation/update/{id}', [AccommodationController::class, 'update']); // Atualizar Acomodação
     Route::put('escort/update/{id_user}/{id_escort}', [EscortController::class, 'update']); // Atualizar Acompanhante
 

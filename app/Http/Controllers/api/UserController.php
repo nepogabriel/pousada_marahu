@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -29,7 +30,7 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         $user->cpf = $request->cpf;
         $user->phone = $request->phone;
 
@@ -53,15 +54,23 @@ class UserController extends Controller
 //        //
 //    }
 
-//    public function update(Request $request, $id)
-//    {
-//        //
-//    }
+    public function update(Request $request)
+    {
+        // Alterando somente os dados que vieram na requisição
+        User::findOrFail($request->id)->update($request->all());
+
+        return response()->json(['message' => 'Usuário editado!'], 200);
+    }
 
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
+        try {
+            User::findOrFail($id)->delete();
 
-        return response()->json(['mensage' => 'Usuário deletado!']);
+            return response()->json(['mensage' => 'Usuário deletado!'], 200);
+        } catch (Exception $ex) {
+            return response()->json(['error' => true, 'message' => $ex->getMessage()], $ex->getCode());
+        }
+
     }
 }
