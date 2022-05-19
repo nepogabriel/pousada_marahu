@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -29,18 +31,16 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         $user->cpf = $request->cpf;
         $user->phone = $request->phone;
 
         $user->save();
 
-//        if( $user->save() )
-//            return 'Usuário cadastrado com sucesso!';
-//        else
-//            return 'Não foi possível cadastrar o usuário!';
-
-        return 'Usuário cadastrado com sucesso!';
+        if( $user->save() )
+            return response()->json(['message' => 'Usuário cadastrado com sucesso!'], 200);
+        else
+            return response()->json(['message' => 'Não foi possível cadastrar o usuário!'], 500);
     }
 
 //    public function show($id)
@@ -53,13 +53,23 @@ class UserController extends Controller
 //        //
 //    }
 
-//    public function update(Request $request, $id)
-//    {
-//        //
-//    }
+    public function update(Request $request)
+    {
+        // Alterando somente os dados que vieram na requisição
+        User::findOrFail($request->id)->update($request->all());
+
+        return response()->json(['message' => 'Usuário editado!'], 200);
+    }
 
     public function destroy($id)
     {
-        //
+        try {
+            User::findOrFail($id)->delete();
+
+            return response()->json(['mensage' => 'Usuário deletado!'], 200);
+        } catch (Exception $ex) {
+            return response()->json(['error' => true, 'message' => $ex->getMessage()], $ex->getCode());
+        }
+
     }
 }
