@@ -16,7 +16,7 @@
 
 ## USUÁRIO
 ### Criar usuário:
-    http://127.0.0.1:8000/api/users/create
+    http://127.0.0.1:8000/api/user/create
 - Tipo: **POST**
 
 

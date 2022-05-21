@@ -34,7 +34,6 @@ Route::middleware([ProtectedRouteAuth::class])->group(function () {
     Route::get('escort/{id_user}/{id_escort}', [EscortController::class, 'info']); // Listar acompanhante específico
 
     // POST
-    Route::post('users/create', [UserController::class, 'store']); // Criar usuário
     Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
     Route::post('escort/create/{id}', [EscortController::class, 'store']); // Cadastrar
     Route::post('me', [AuthController::class, 'me']);
@@ -52,6 +51,7 @@ Route::middleware([ProtectedRouteAuth::class])->group(function () {
 });
 
 Route::post('login', [AuthController::class, 'login']); // Login
+Route::post('user/create', [UserController::class, 'store']); // Criar usuário
 
 route::get('/', function() {
     return response()->json(['api_name' => 'api-marahu', 'api_version' => '1.0.0']);
