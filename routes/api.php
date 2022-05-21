@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\api\EscortController;
+use App\Http\Controllers\api\ReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,7 @@ Route::middleware([ProtectedRouteAuth::class])->group(function () {
     Route::post('escort/create/{id}', [EscortController::class, 'store']); // Cadastrar
     Route::post('me', [AuthController::class, 'me']);
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('reservation', [ReservationController::class, 'setUpReservation']);
 
     // PUT
     Route::put('user/update/{id}', [UserController::class, 'update']); // Atualizar Acomodação
