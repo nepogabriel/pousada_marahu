@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\api\AppController;
 use App\Http\Controllers\api\EscortController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,8 @@ Route::middleware([ProtectedRouteAuth::class])->group(function () {
 
 Route::post('login', [AuthController::class, 'login']); // Login
 Route::post('user/create', [UserController::class, 'store']); // Criar usuário
+
+Route::post('app/create', [AppController::class, 'store']);
 
 route::get('/', function() {
     return response()->json(['api_name' => 'api-marahu', 'api_version' => '1.0.0']);
