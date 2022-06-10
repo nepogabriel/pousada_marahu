@@ -29,10 +29,8 @@ use App\Http\Middleware\Api\ProtectedRouteAuth;
 Route::middleware([ProtectedRouteAuth::class])->group(function () {
     // GET
     Route::get('users', [UserController::class, 'index']); // Listar usuários
-    Route::get('accommodations', [AccommodationController::class, 'index']); // Listar Acomodações
     Route::get('accommodation/info/{id}', [AccommodationController::class, 'info']); // Dados p/ pág. de edição Acomodação
     Route::get('escorts/{id}', [EscortController::class, 'index']); // Listar todos os acompanhantes
-    Route::get('escort/{id_user}/{id_escort}', [EscortController::class, 'info']); // Listar acompanhante específico
 
     // POST
     Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
@@ -53,6 +51,8 @@ Route::middleware([ProtectedRouteAuth::class])->group(function () {
 
 Route::post('login', [AuthController::class, 'login']); // Login
 Route::post('user/create', [UserController::class, 'store']); // Criar usuário
+Route::get('accommodations', [AccommodationController::class, 'index']); // Listar Acomodações
+Route::get('escort/{id_user}/{id_escort}', [EscortController::class, 'info']); // Listar acompanhante específico
 
 Route::post('app/create', [AppController::class, 'store']);
 Route::get('app/list', [AppController::class, 'index']);
