@@ -3,23 +3,45 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
-    public function setUpReservation(Request $request)
+    public function calculateReservation(Request $request)
     {
-        $reservation = [
-            'id_user' => $request->id_user,
-            'id_accommodation' => $request->id_accommodation,
-            'entry_date' => date('Y-m-d', strtotime($request->entry_date)),
-            'exit_date' => date('Y-m-d', strtotime($request->exit_date)),
-            'value' => $request->value,
+        // Data atual
+        $currentDate = date('Y-m-d');
+        //$currentDate = Carbon::now();
 
-        ];
+        // Data de entrada
+//        $entry_date_format = Carbon::createFromFormat('Y-m-d', $request->entry_date);
+//        $entry_date = $entry_date_format->format('Y-m-d');
 
-        $teste = $reservation['entry_date']->diffInHours($reservation['exit_date']);
+        $entry_date = $request->start_date;
 
-        return response()->json($teste);
+
+        // Data de saída
+//        $exit_date_format = Carbon::createFromFormat('Y-m-d', $request->exit_date);
+//        $exit_date = $exit_date_format->format('Y-m-d');
+
+        $exit_date = $request->end_date;
+
+        if($entry_date >= $currentDate && $exit_date > $currentDate && $entry_date < $exit_date) {
+
+            if ($request->adults == 2) {
+                $diaria = 5;
+                $value = 300;
+
+                $valueTotal = $diaria * $value;
+
+                return response()->json(['Valor total' => $valueTotal], 200);
+            }
+
+            // Lógica do restante das diárias
+        }
+
+        return response()->json(['message' => 'Desculpe! Escolha uma data válida!'], 500);
     }
 }
