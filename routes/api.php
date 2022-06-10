@@ -55,6 +55,8 @@ Route::post('login', [AuthController::class, 'login']); // Login
 Route::post('user/create', [UserController::class, 'store']); // Criar usuário
 
 Route::post('app/create', [AppController::class, 'store']);
+Route::get('app/list', [AppController::class, 'index']);
+Route::get('app/info/{id}', [AppController::class, 'info']);
 
 route::get('/', function() {
     return response()->json(['api_name' => 'api-marahu', 'api_version' => '1.0.0']);
