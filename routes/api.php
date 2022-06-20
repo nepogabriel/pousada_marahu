@@ -1,15 +1,15 @@
 <?php
 
 
-use App\Http\Controllers\api\AppController;
-use App\Http\Controllers\api\EscortController;
+use App\Http\Controllers\Api\AppController;
+use App\Http\Controllers\Api\EscortController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 // Controller
-use App\Http\Controllers\api\UserController;
-use App\Http\Controllers\api\AuthController;
-use App\Http\Controllers\api\AccommodationController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\AccommodationController;
 // Model
 use App\Models\User;
 
@@ -29,8 +29,8 @@ use App\Http\Middleware\Api\ProtectedRouteAuth;
 Route::middleware([ProtectedRouteAuth::class])->group(function () {
     // GET
     Route::get('users', [UserController::class, 'index']); // Listar usuários
-    Route::get('accommodation/info/{id}', [AccommodationController::class, 'info']); // Dados p/ pág. de edição Acomodação
     Route::get('escorts/{id}', [EscortController::class, 'index']); // Listar todos os acompanhantes
+    Route::get('escort/{id_user}/{id_escort}', [EscortController::class, 'info']); // Listar acompanhante específico
 
     // POST
     Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
@@ -52,8 +52,9 @@ Route::middleware([ProtectedRouteAuth::class])->group(function () {
 Route::post('login', [AuthController::class, 'login']); // Login
 Route::post('user/create', [UserController::class, 'store']); // Criar usuário
 Route::get('accommodations', [AccommodationController::class, 'index']); // Listar Acomodações
-Route::get('escort/{id_user}/{id_escort}', [EscortController::class, 'info']); // Listar acompanhante específico
+Route::get('accommodation/info/{id}', [AccommodationController::class, 'info']); // Listar Acomodação específica
 
+// App - PHP + Ionic(vue.js)
 Route::post('app/create', [AppController::class, 'store']);
 Route::get('app/list', [AppController::class, 'index']);
 Route::get('app/info/{id}', [AppController::class, 'info']);
