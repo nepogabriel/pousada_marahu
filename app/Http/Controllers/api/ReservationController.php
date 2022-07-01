@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Services\Reservation\MarahuService;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
@@ -20,22 +21,28 @@ class ReservationController extends Controller
 
         if(($entry_date >= $currentDate) && ($exit_date > $currentDate) && ($entry_date < $exit_date)) {
 
-            // Calculo para 2 diárias - Adulto
-            if ($request->adults == 2) {
-                $result = $this->calcuteTwoPeopleMarahu($request->hotelRate, $request->value);
+            $reservation = new MarahuService();
+
+            switch ($reservation) {
+                // Calculo para 2 diárias - Adulto
+                case $request->adults == 2 && $request->type == 'suite':
+                    return $reservation->calcuteTwoPeopleMarahu($request->hotelRate, $request->value);
+                    break;
+
+                case $request->adults > 2 && $request->type == 'suite':
+                    return $reservation->calculateSuiteMarahu($request->adults);
+
+                // Calculo do chalé
+                case $request->type == 'chale':
+                    return $reservation->calculateLodgeMarahu($request->adults);
+                    break;
+                default:
+                    return response()->json(['error' => 'Não foi possível calcular a reserva!'], 500);
             }
 
             // todo Lógica do restante das diárias
-
-            return $result;
         }
 
         return response()->json(['message' => 'Desculpe! Escolha uma data válida!'], 500);
-    }
-
-    private function calcuteTwoPeopleMarahu($hotelRate, $value) {
-        $valueTotal = $hotelRate * $value;
-
-        return response()->json(['Valor total' => $valueTotal], 200);
     }
 }
