@@ -4,34 +4,58 @@ namespace App\Services\Reservation;
 
 class MarahuService
 {
-    public $hotelRate = 0;
-    public $value = 0.0;
-    public $adults = 0;
+    //public string $hotelRate; // Verificar se da certo assim
+    public $hotelRate;
+    public $value;
+    public $adults;
 
     // todo Verificar se é melhor usar o construtor ou parametros nos métodos
-    public function __construct($hotelRate, $value, $adults) {
-        $this->hotelRate = $hotelRate;
-        $this->value = $value;
-        $this->adults = $adults;
-    }
+//    public function __construct($hotelRate, $value, $adults) {
+//        $this->hotelRate = $hotelRate;
+//        $this->value = $value;
+//        $this->adults = $adults;
+//    }
 
     // Calculo para 2 diárias - Adulto
-    public function calcuteTwoPeopleMarahu($hotelRate, $value)
+    public function calcuteTwoPeopleMarahu(string $hotelRate, float $value)
     {
-        $valueTotal = $this->hotelRate * $this->value;
+        $total = hotelRate * value;
 
-        return response()->json(['Valor total' => $valueTotal], 200);
+        return response()->json(['Total' => $total], 200);
     }
 
     // Calculo da suíte
-    public function calculateSuiteMarahu($adults) {
-        return response()->json(['mensagem' => 'deu certo SUite!']);
+    public function calculateSuiteMarahu(int $adults, $children, $pets)
+    {
+        if ($adults <= 6) {
+            $total = $adults * 100;
+        }
+
+        if ($children != 0) {
+            foreach ($children as $child) {
+                $childAge = $child['childAge'];
+
+                if($childAge <= 6) {
+                    $total += 0;
+                }
+
+                if($childAge > 6 && $childAge <= 12) {
+                    $total += 50;
+                }
+            }
+        }
+
+        if ($pets != 0) {
+            $total += count($pets) * 50;
+        }
+
+        return response()->json(['Total' => $total], 200);
     }
 
     // Calculo do chalé
-    public function calculateLodgeMarahu($adults)
+    public function calculateLodgeMarahu(int $adults)
     {
-        if ($this->$adults >= 6 && $adults <= 10) {
+        if ($adults >= 6 && $adults <= 10) {
             return response()->json(['mensagem' => 'deu certo!']);
         }
 

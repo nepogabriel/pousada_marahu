@@ -21,25 +21,28 @@ class ReservationController extends Controller
 
         if(($entry_date >= $currentDate) && ($exit_date > $currentDate) && ($entry_date < $exit_date)) {
 
-            // todo Verificar se é melhor usar o construtor ou parametros nos métodos
-            $reservation = new MarahuService($request->hotelRate, $request->value, $request->adults);
+            $reservation = new MarahuService();
 
             switch ($reservation) {
                 // Calculo para 2 diárias - Adulto
                 case $request->adults == 2 && $request->type == 'suite':
-                    return $reservation->calcuteTwoPeopleMarahu();
+                    $result = $reservation->calcuteTwoPeopleMarahu($request->hotelRate, $request->value);
                     break;
 
+                //Calculo suíte
                 case $request->adults > 2 && $request->type == 'suite':
-                    return $reservation->calculateSuiteMarahu();
+                    $result = $reservation->calculateSuiteMarahu($request->adults, $request->children, $request->pets);
+                    break;
 
                 // Calculo do chalé
                 case $request->type == 'chale':
-                    return $reservation->calculateLodgeMarahu();
+                    $result = $reservation->calculateLodgeMarahu($request->adults);
                     break;
                 default:
-                    return response()->json(['error' => 'Não foi possível calcular a reserva!'], 500);
+                    $result = response()->json(['error' => 'Não foi possível calcular a reserva!'], 500);
             }
+
+            return $result;
 
             // todo Lógica do restante das diárias
         }
