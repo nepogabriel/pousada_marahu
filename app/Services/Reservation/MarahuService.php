@@ -19,16 +19,16 @@ class MarahuService
     // Calculo para 2 diárias - Adulto
     public function calcuteTwoPeopleMarahu(string $hotelRate, float $value)
     {
-        $total = hotelRate * value;
+        $total = $hotelRate * $value;
 
         return response()->json(['Total' => $total], 200);
     }
 
     // Calculo da suíte
-    public function calculateSuiteMarahu(int $adults, $children, $pets)
+    public function calculateSuiteMarahu(int $hotelRate, int $adults, $children, $pets)
     {
         if ($adults <= 6) {
-            $total = $adults * 100;
+            $subtotal = $adults * 100;
         }
 
         if ($children != 0) {
@@ -36,18 +36,20 @@ class MarahuService
                 $childAge = $child['childAge'];
 
                 if($childAge <= 6) {
-                    $total += 0;
+                    continue;
                 }
 
                 if($childAge > 6 && $childAge <= 12) {
-                    $total += 50;
+                    $subtotal += 50;
                 }
             }
         }
 
         if ($pets != 0) {
-            $total += count($pets) * 50;
+            $subtotal += $pets * 50;
         }
+
+        $total = $subtotal * $hotelRate;
 
         return response()->json(['Total' => $total], 200);
     }
