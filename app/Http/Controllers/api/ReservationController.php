@@ -26,17 +26,17 @@ class ReservationController extends Controller
 
             switch ($reservation) {
                 // Calculo para 2 diárias - Adulto
-                case $request->adults == 2 && $request->type == 'suite':
+                case $request->adults <= 2:
                     $result = $reservation->calcuteTwoPeopleMarahu($request->hotelRate, $request->value);
                     break;
 
                 //Calculo suíte
-                case $request->adults > 2 && $request->type == 'suite':
+                case $request->adults > 2 && $request->adults <= 6:
                     $result = $reservation->calculateSuiteMarahu($request->hotelRate, $request->adults, $request->children, $request->pets);
                     break;
 
                 // Calculo do chalé
-                case $request->type == 'chale':
+                case $request->adults > 6:
                     $result = $reservation->calculateLodgeMarahu($request->hotelRate, $request->adults);
                     break;
                 default:

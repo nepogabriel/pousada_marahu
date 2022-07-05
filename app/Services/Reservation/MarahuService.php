@@ -27,8 +27,12 @@ class MarahuService
     // Calculo da suíte
     public function calculateSuiteMarahu(int $hotelRate, int $adults, $children, $pets)
     {
+        // VERIFICAR ESSA LÓGICA
         if ($adults <= 6) {
-            $subtotal = $adults * 100;
+            $subtotal = 2 * 300;
+            $subtotal += ($adults - 2) * 100;
+
+            // $subtotal = $adults * 100;
         }
 
         if ($children != 0) {
@@ -55,13 +59,35 @@ class MarahuService
     }
 
     // Calculo do chalé
-    public function calculateLodgeMarahu(int $adults)
+    public function calculateLodgeMarahu(int $hotelRate, int $adults, $children, $pets)
     {
         if ($adults >= 6 && $adults <= 10) {
-            return response()->json(['mensagem' => 'deu certo!']);
+        $subtotal = $adults * 100;
         }
 
-        return response()->json(['error' => 'Escolha entre 6 a 10 pessoas!'], 500);
+        if ($children != 0) {
+            foreach ($children as $child) {
+                $childAge = $child['childAge'];
+
+                if($childAge <= 6) {
+                    continue;
+                }
+
+                if($childAge > 6 && $childAge <= 12) {
+                    $subtotal += 50;
+                }
+            }
+        }
+
+        if ($pets != 0) {
+            $subtotal += $pets * 50;
+        }
+
+        $total = $subtotal * $hotelRate;
+
+        return response()->json(['Total' => $total], 200);
+
+        //return response()->json(['error' => 'Escolha entre 6 a 10 pessoas!'], 500);
 
     }
 }
