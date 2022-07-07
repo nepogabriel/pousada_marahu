@@ -13,32 +13,32 @@ class ReservationController extends Controller
     public function calculateReservation(Request $request)
     {
         // Data atual
-        $currentDate = date('Y-m-d');
-        $entry_date = $request->start_date;
+        $today = date('Y-m-d');
+        $checkIn = $request->checkIn;
 
         // Data de saída
-        $exit_date = $request->end_date;
+        $checkOut = $request->checkOut;
 
-        if(($entry_date >= $currentDate) && ($exit_date > $currentDate) && ($entry_date < $exit_date)) {
-
+        if(($checkIn >= $today) && ($checkOut > $today) && ($checkIn < $checkOut)) {
             // todo Verificar se é melhor usar o construtor ou parametros nos métodos
-            $reservation = new MarahuService();
+            $reservation = new MarahuService($request->hotelRate, $request->adults, $request->children, $request->pets);
 
             switch ($reservation) {
                 // Calculo para 2 diárias - Adulto
                 case $request->adults <= 2:
-                    $result = $reservation->calcuteTwoPeopleMarahu($request->hotelRate, $request->value);
+                    $result = $reservation->calcuteTwoPeopleMarahu();
                     break;
 
                 //Calculo suíte
                 case $request->adults > 2 && $request->adults <= 6:
-                    $result = $reservation->calculateSuiteMarahu($request->hotelRate, $request->adults, $request->children, $request->pets);
+                    $result = $reservation->calculateSuiteMarahu();
                     break;
 
                 // Calculo do chalé
-                case $request->adults > 6:
-                    $result = $reservation->calculateLodgeMarahu($request->hotelRate, $request->adults);
+                case $request->adults >= 6 && $request->adults <= 10:
+                    $result = $reservation->calculateLodgeMarahu();
                     break;
+
                 default:
                     $result = response()->json(['error' => 'Não foi possível calcular a reserva!'], 500);
             }
