@@ -130,14 +130,22 @@
 - Exemplo *JSON*:
 ``` json
 {
-    "start_date": "2022-07-30", - String (yyyy-mm-dd)
-    "end_date": "2022-08-20", - String (yyyy-mm-dd)
-    "hotelRate": 5, - Int
-    "value": 300.0, - Float
-    "type": "chale", - String ("chale", "suite")
+    "checkIn": "2022-07-30", - String (yyyy-mm-dd)
+    "checkOut": "2022-08-20", - String (yyyy-mm-dd)
+    "hotelRate": 3, Int
     "adults": 3, - Int
-    "children": 0, - Int
-    "pet": 0 - Int
+    "children": [ 
+        {
+            "childAge": 2 - Int
+        },
+        {
+            "childAge": 7 - Int
+        },
+        {
+            "childAge": 13 - Int
+        }
+    ],
+    "pets": 2 - Int
 }
 ```
 
