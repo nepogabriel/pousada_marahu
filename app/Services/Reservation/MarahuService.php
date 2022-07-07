@@ -5,8 +5,8 @@ namespace App\Services\Reservation;
 class MarahuService
 {
     //public string $hotelRate; // Verificar se da certo assim
-    private $hotelRate;
-    private $adults;
+    private int $hotelRate;
+    private int $adults;
     private $children;
     private $pets;
 
@@ -21,6 +21,7 @@ class MarahuService
     // Calculo para 2 diárias - Adulto
     public function calcuteTwoPeopleMarahu()
     {
+        // VERIFICAR ESSA LÓGICA
         try {
             $total = $this->hotelRate * 300;
 
@@ -34,12 +35,17 @@ class MarahuService
     public function calculateSuiteMarahu()
     {
         // VERIFICAR ESSA LÓGICA
+        /* todo Tirar essas dúvidas:
+         * 2 pessoas sempre vão pagar 300 de diárias, ou só na primeira noite/dia
+         * Na suíte são até 6 pessoas incluindo crianças?
+         * No chalé são até 10 pessoas incluindo crianças?
+         * */
         try {
             $subtotal = 2 * 300;
-            $subtotal += $adults > 2 ? ($adults - 2) * 100 : 0;
+            $subtotal += $this->adults > 2 ? ($this->adults - 2) * 100 : 0;
 
-            if ($children != 0) {
-                foreach ($children as $child) {
+            if ($this->children != 0) {
+                foreach ($this->children as $child) {
                     $childAge = $child['childAge'];
 
                     if($childAge <= 6) {
@@ -56,13 +62,11 @@ class MarahuService
                 }
             }
 
-            if ($pets != 0) {
-                foreach ($pets as $pet) {
-                    $subtotal += 50;
-                }
+            if ($this->pets != 0) {
+                $subtotal += $this->pets * 50;
             }
 
-            $total = $subtotal * $hotelRate;
+            $total = $subtotal * $this->hotelRate;
 
             return response()->json(['Total' => $total], 200);
         } catch(\Exception $e) {
@@ -74,11 +78,12 @@ class MarahuService
     public function calculateLodgeMarahu()
     {
         // VERIFICAR ESSA LÓGICA
+        // todo Se 2 casais é o valor da suíte (4 pessoas) (Solução: opção para informar o sexo/casal na pág. de acomodação ou reserva, analisar melhor)
         try {
-            $subtotal = $adults * 100;
+            $subtotal = $this->adults * 100;
 
-            if ($children != 0) {
-                foreach ($children as $child) {
+            if ($this->children != 0) {
+                foreach ($this->children as $child) {
                     $childAge = $child['childAge'];
 
                     if ($childAge <= 6) {
@@ -95,13 +100,11 @@ class MarahuService
                 }
             }
 
-            if ($pets != 0) {
-                foreach ($pets as $pet) {
-                    $subtotal += 50;
-                }
+            if ($this->pets != 0) {
+                $subtotal += $this->pets * 50;
             }
 
-            $total = $subtotal * $hotelRate;
+            $total = $subtotal * $this->hotelRate;
 
             return response()->json(['Total' => $total], 200);
         } catch(\Exception $e) {
