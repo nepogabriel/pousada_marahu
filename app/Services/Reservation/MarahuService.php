@@ -36,7 +36,8 @@ class MarahuService
     {
         // VERIFICAR ESSA LÓGICA
         /* todo Tirar essas dúvidas:
-         * 2 pessoas sempre vão pagar 300 de diárias, ou só na primeira noite/dia
+         * 2 pessoas sempre vão pagar 300 de diárias, ou só na primeira noite/dia??
+         * Esse valor de 300 é apenas para casal?
          * O chalé sempre vai ser a diária de 100 reais?
          * Na suíte são até 6 pessoas incluindo crianças?
          * No chalé são até 10 pessoas incluindo crianças?
