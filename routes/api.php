@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Api\AppController;
 use App\Http\Controllers\Api\EscortController;
+use App\Http\Controllers\api\ReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,7 @@ Route::post('login', [AuthController::class, 'login']); // Login
 Route::post('user/create', [UserController::class, 'store']); // Criar usuário
 Route::get('accommodations', [AccommodationController::class, 'index']); // Listar Acomodações
 Route::get('accommodation/info/{id}', [AccommodationController::class, 'info']); // Listar Acomodação específica
+Route::post('reservation/calculate', [ReservationController::class, 'calculateReservation']); // Calcular Reserva
 
 // App - PHP + Ionic(vue.js)
 Route::post('app/create', [AppController::class, 'store']);
