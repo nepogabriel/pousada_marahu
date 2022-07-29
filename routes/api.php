@@ -3,7 +3,7 @@
 
 use App\Http\Controllers\Api\AppController;
 use App\Http\Controllers\Api\EscortController;
-use App\Http\Controllers\api\ReservationController;
+use App\Http\Controllers\Api\ReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
