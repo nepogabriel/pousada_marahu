@@ -19,7 +19,6 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-
         try {
             $credentials = $request->only('email', 'password');
 
