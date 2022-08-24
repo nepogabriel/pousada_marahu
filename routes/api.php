@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AccommodationController;
+use App\Http\Controllers\Api\SettingsController;
 // Model
 use App\Models\User;
 
@@ -52,9 +53,12 @@ Route::middleware([ProtectedRouteAuth::class])->group(function () {
 
 Route::post('login', [AuthController::class, 'login']); // Login
 Route::post('user/create', [UserController::class, 'store']); // Criar usuário
+Route::post('reservation/calculate', [ReservationController::class, 'calculateReservation']); // Calcular Reserva
 Route::get('accommodations', [AccommodationController::class, 'index']); // Listar Acomodações
 Route::get('accommodation/info/{id}', [AccommodationController::class, 'info']); // Listar Acomodação específica
 Route::post('reservation/calculate', [ReservationController::class, 'calculateReservation']); // Calcular Reserva
+Route::get('url', [SettingsController::class, 'getUrlApi']); // Pegar url da api
+
 
 // App - PHP + Ionic(vue.js)
 Route::post('app/create', [AppController::class, 'store']);
