@@ -21,17 +21,26 @@ class AccommodationController extends Controller
             $accommodation = new Accommodation();
 
             $accommodation->name = $request->name;
-            $accommodation->value = $request->value;
+            $accommodation->value = $request->value ?: null;
+            $accommodation->adult_value = $request->adult_value;
+            $accommodation->child_value = $request->child_value;
+            $accommodation->pet_value = $request->pet_value;
+            $accommodation->image = $request->image;
             $accommodation->double_bed = $request->double_bed;
             $accommodation->single_bed = $request->single_bed;
             $accommodation->air_conditioning = $request->air_conditioning;
             $accommodation->tv = $request->tv;
+            $accommodation->description = $request->description;
 
             $accommodation->save();
 
             return response()->json(['message' => 'Acomodação cadastrada!'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Erro ao cadastrar a acomodação!'], 500);
+            return response()->json([
+                'message' => 'Erro ao cadastrar a acomodação!',
+                'error' => $e->getMessage(),
+                'code' => $e->getCode()
+            ], 500);
         }
     }
 

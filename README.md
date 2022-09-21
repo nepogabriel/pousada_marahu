@@ -44,12 +44,16 @@
 - Exemplo *JSON*:
 ``` json
 {
-    "name": "Suíte Família",
-    "value": 300.34,
-    "double_bed": 0,
-    "single_bed": 1,
-    "air_conditioning": 0,
-    "tv": 3
+	"name": "Nome da Acomodação", : Obrigatório
+	"adult_value": 60.00,
+	"child_value": 30.00,
+	"pet_value": 40.00,
+	"image": "link.com",
+	"double_bed": 2,
+	"single_bed": 1,
+	"air_conditioning": 0,
+	"tv": 3,
+	"description": "Descrição da acomodação"
 }
 ```
 

@@ -25,7 +25,7 @@ class CreateAccommodationTable extends Migration
             $table->integer('single_bed')->nullable();
             $table->integer('air_conditioning')->nullable();
             $table->integer('tv')->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
