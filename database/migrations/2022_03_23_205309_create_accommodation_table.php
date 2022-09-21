@@ -15,7 +15,6 @@ class CreateAccommodationTable extends Migration
     {
         Schema::create('accommodation', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('name', 60);
             $table->decimal('value', 5, 2)->nullable();
             $table->decimal('adult_value', 5)->nullable();
@@ -27,6 +26,7 @@ class CreateAccommodationTable extends Migration
             $table->integer('air_conditioning')->nullable();
             $table->integer('tv')->nullable();
             $table->text('description');
+            $table->timestamps();
         });
     }
 
