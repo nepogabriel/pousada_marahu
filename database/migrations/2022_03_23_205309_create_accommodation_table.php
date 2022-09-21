@@ -17,11 +17,16 @@ class CreateAccommodationTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name', 60);
-            $table->decimal('value', 5, 2);
-            $table->integer('double_bed');
-            $table->integer('single_bed');
-            $table->integer('air_conditioning');
-            $table->integer('tv');
+            $table->decimal('value', 5, 2)->nullable();
+            $table->decimal('adult_value', 5)->nullable();
+            $table->decimal('child_value', 5)->nullable();
+            $table->decimal('pet_value', 5)->nullable();
+            $table->string('image', 255)->nullable();
+            $table->integer('double_bed')->nullable();
+            $table->integer('single_bed')->nullable();
+            $table->integer('air_conditioning')->nullable();
+            $table->integer('tv')->nullable();
+            $table->text('description');
         });
     }
 
