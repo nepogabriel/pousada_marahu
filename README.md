@@ -119,7 +119,7 @@
 ✍ OBS.: Enviar somente o campo que for alterar.
 
 ### Deletar Acompanhante:
-    http://127.0.0.1:8000/api/escort/delete/{id_user}/{id_escort}
+    /api/escort/delete/{id_user}/{id_escort}
 
 ---
 
@@ -129,30 +129,49 @@
 - Tipo: **POST**
 - Endpoint:
 ```
-- api/reservation/calculate
+- /api/reservation/calculate
 ```
 - Exemplo *JSON*:
 ``` json
 {
-    "checkIn": "2022-07-30", - String (yyyy-mm-dd)
-    "checkOut": "2022-08-20", - String (yyyy-mm-dd)
-    "hotelRate": 3, Int
-    "adults": 3, - Int
+    "checkIn": "2022-07-30",
+    "checkOut": "2022-08-20",
+    "hotelRate": 3,
+    "adults": 3,
     "children": [ 
         {
-            "childAge": 2 - Int
+            "childAge": 2
         },
         {
-            "childAge": 7 - Int
+            "childAge": 7
         },
         {
-            "childAge": 13 - Int
+            "childAge": 13
         }
     ],
-    "pets": 2 - Int
+    "pets": 2
 }
 ```
 
+### Cadastrar Reserva (Cadastrar no carrinho)
+- Tipo: **POST**
+- Endpoint:
+```
+- /api/reservation/create
+```
+- Exemplo *JSON*:
+
+```
+{
+    "id_user": 1,
+    "id_accommodation": 2,
+    "checkin": "00/00/0000",
+    "checkout": "00/00/0000",
+    "value": 1000.00,
+    "companions": {},
+    "pets": {}
+}
+```
 ---
 
 # Doc. Laravel

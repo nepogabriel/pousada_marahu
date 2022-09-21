@@ -39,8 +39,7 @@ class AccommodationController extends Controller
             return response()->json([
                 'message' => 'Erro ao cadastrar a acomodação!',
                 'error' => $e->getMessage(),
-                'code' => $e->getCode()
-            ], 500);
+            ], 400);
         }
     }
 

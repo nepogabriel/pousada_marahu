@@ -35,6 +35,7 @@ Route::middleware([ProtectedRouteAuth::class])->group(function () {
     Route::get('escort/{id_user}/{id_escort}', [EscortController::class, 'info']); // Listar acompanhante específico
 
     // POST
+    Route::post('reservation/create', [ReservationController::class, 'createReservation']); // Criar Reserva
     Route::post('accommodation/create', [AccommodationController::class, 'store']); // Criar Acomodação
     Route::post('escort/create/{id}', [EscortController::class, 'store']); // Cadastrar
     Route::post('me', [AuthController::class, 'me']);

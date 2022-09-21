@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Reservation;
 use App\Services\Reservation\MarahuService;
 use Carbon\Carbon;
 use DateTime;
@@ -48,6 +49,32 @@ class ReservationController extends Controller
             // todo Lógica do restante das diárias
         }
 
-        return response()->json(['message' => 'Desculpe! Escolha uma data válida!'], 500);
+        return response()->json(['message' => 'Desculpe! Escolha uma data válida!'], 400);
+    }
+
+    public function createReservation(Request $request)
+    {
+        try {
+            $reservation = new Reservation();
+
+            $reservation->id_user = $request->id_user;
+            $reservation->id_accommodation = $request->id_accomodation;
+            $reservation->checkin = $request->checkin;
+            $reservation->checkout = $request->checkout;
+            $reservation->value = $request->value;
+            $reservation->companions = $request->companions;
+            $reservation->pets = $request->pets;
+
+            $reservation->save();
+
+            return response()->json(['message' => 'Reserva realizada!'], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao realizar a reserva!',
+                'error' => $e->getMessage(),
+            ], 400);
+        }
+
+
     }
 }
