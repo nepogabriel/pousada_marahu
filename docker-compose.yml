@@ -1,0 +1,81 @@
+version: "3.9"
+
+services:
+    # image project
+    app:
+        build: 
+            args: 
+                user: marahu
+                uid: 12345
+            context: ./
+            dockerfile: Dockerfile
+        # image: laravel-app
+        container_name: marahu_laravel
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        depends_on: 
+            - redis
+            - queue
+        networks: 
+            - marahu
+    
+    # nginx
+    nginx:
+        image: nginx:alpine
+        container_name: marahu_nginx
+        restart: unless-stopped
+        ports: 
+            - 9191:80
+        volumes: 
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks: 
+            - marahu
+
+    # db mysql
+    mysql:
+        image: mysql:5.7.22
+        container_name: marahu_mysql
+        restart: unless-stopped
+        environment: 
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        volumes: 
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports: 
+            - 3388:3306
+        networks: 
+            - marahu
+
+    # queue
+    queue:
+        build: 
+            args: 
+                user: marahu
+                uid: 12345
+            context: ./
+            dockerfile: Dockerfile
+        container_name: marahu_queue
+        restart: unless-stopped
+        command: "php artisan queue:work"
+        volumes: 
+            - ./:/var/www
+        depends_on: 
+            - redis
+        networks: 
+            - marahu
+
+    # redis
+    redis:
+        image: redis:latest
+        container_name: marahu_redis
+        networks: 
+            - marahu
+
+networks: 
+    marahu:
+        driver: bridge

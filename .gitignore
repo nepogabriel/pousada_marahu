@@ -13,3 +13,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+.docker/dbdata
+/.docker/dbdata
+.docker/mysql
+/.docker/mysql
