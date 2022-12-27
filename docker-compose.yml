@@ -16,8 +16,7 @@ services:
         volumes:
             - ./:/var/www
         depends_on: 
-            - redis
-            - queue
+            - mysql
         networks: 
             - marahu
     
@@ -52,29 +51,29 @@ services:
             - marahu
 
     # queue
-    queue:
-        build: 
-            args: 
-                user: marahu
-                uid: 12345
-            context: ./
-            dockerfile: Dockerfile
-        container_name: marahu_queue
-        restart: unless-stopped
-        command: "php artisan queue:work"
-        volumes: 
-            - ./:/var/www
-        depends_on: 
-            - redis
-        networks: 
-            - marahu
+    # queue:
+    #     build: 
+    #         args: 
+    #             user: marahu
+    #             uid: 12345
+    #         context: ./
+    #         dockerfile: Dockerfile
+    #     container_name: marahu_queue
+    #     restart: unless-stopped
+    #     command: "php artisan queue:work"
+    #     volumes: 
+    #         - ./:/var/www
+    #     depends_on: 
+    #         - redis
+    #     networks: 
+    #         - marahu
 
     # redis
-    redis:
-        image: redis:latest
-        container_name: marahu_redis
-        networks: 
-            - marahu
+    # redis:
+    #     image: redis:latest
+    #     container_name: marahu_redis
+    #     networks: 
+    #         - marahu
 
 networks: 
     marahu:
