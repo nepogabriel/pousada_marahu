@@ -68,7 +68,7 @@ class ReservationController extends Controller
             $reservation->save();
 
             return response()->json(['message' => 'Reserva realizada!'], 200);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Erro ao realizar a reserva!',
                 'error' => $e->getMessage(),
