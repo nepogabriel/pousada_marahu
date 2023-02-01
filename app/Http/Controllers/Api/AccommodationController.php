@@ -31,6 +31,8 @@ class AccommodationController extends Controller
             $accommodation->air_conditioning = $request->air_conditioning;
             $accommodation->tv = $request->tv;
             $accommodation->description = $request->description;
+            $accommodation->min_people = $request->min_people;
+            $accommodation->max_people = $request->max_people;
 
             $accommodation->save();
 

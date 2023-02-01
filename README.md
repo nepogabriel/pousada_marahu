@@ -44,7 +44,7 @@
 - Exemplo *JSON*:
 ``` json
 {
-	"name": "Nome da Acomodação", : Obrigatório
+	"name": "Nome da Acomodação",
 	"adult_value": 60.00,
 	"child_value": 30.00,
 	"pet_value": 40.00,
@@ -53,7 +53,9 @@
 	"single_bed": 1,
 	"air_conditioning": 0,
 	"tv": 3,
-	"description": "Descrição da acomodação"
+	"description": "Descrição da acomodação",
+    "min_people": 0,
+    "max_people": 10
 }
 ```
 
@@ -161,7 +163,7 @@
 ```
 - Exemplo *JSON*:
 
-```
+``` json
 {
     "id_user": 1,
     "id_accommodation": 2,
