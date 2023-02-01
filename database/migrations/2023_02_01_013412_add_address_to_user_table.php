@@ -13,7 +13,7 @@ class AddAddressToUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('user', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->date('birth_date');
             $table->integer('postcode')->nullable();
             $table->string('country')->nullable();
@@ -32,7 +32,13 @@ class AddAddressToUserTable extends Migration
     public function down()
     {
         Schema::table('user', function (Blueprint $table) {
-            //
+            $table->dropColumn('birth_date');
+            $table->dropColumn('postcode');
+            $table->dropColumn('country');
+            $table->dropColumn('zone');
+            $table->dropColumn('city');
+            $table->dropColumn('district');
+            $table->dropColumn('street');
         });
     }
 }
