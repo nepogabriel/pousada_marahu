@@ -34,6 +34,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->cpf = $request->cpf;
         $user->phone = $request->phone;
+        $user->birth_date = $request->birth_date;
 
         $user->save();
 
